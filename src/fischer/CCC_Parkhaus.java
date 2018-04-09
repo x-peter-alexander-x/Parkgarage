@@ -1,7 +1,12 @@
 package fischer;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class CCC_Parkhaus {
-    public static void main(String[] args) {
+    public static String main(String[] args) {
 
 
         String input = "";
@@ -16,7 +21,31 @@ public class CCC_Parkhaus {
             System.out.println("no input data found.");
             System.exit(0);
         }
+        public static String loadInputData(String datName)
+        String fileData = "";
+        File file = new File(datName);
 
+        if (!file.canRead() || !file.isFile()) {
+            return "";
+        }
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new FileReader(datName));
+            String zeile = null;
+            while ((zeile = in.readLine()) != null) {
+                fileData += zeile+"\r\n";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null)
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
+        return fileData;
 
     }
 }
